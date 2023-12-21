@@ -89,6 +89,8 @@ jobs:
 ### Use on a GitHub Enterprise Server
 
 You can provide a GitHub Enterprise Server URL using the `ghes-url` input.
+
+> :warning: **Important Note:** The `ghes-url` input requires the API endpoint. For example, it should be in the format `https://github.example.com/api/v3` and *not* `https://github.example.com`. See [here](https://docs.github.com/en/enterprise-server@latest/rest/overview/resources-in-the-rest-api#endpoint-urls) for more information.
   
 ```yml
 on:
@@ -102,7 +104,7 @@ jobs:
       - name: Create or Update Project Card
         uses: peter-evans/create-or-update-project-card@v2
         with:
-          ghes-url: https://github.example.com
+          ghes-url: https://github.example.com/api/v3
           project-name: My project
           column-name: My column
           issue-number: ${{ github.event.number }}
