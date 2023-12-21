@@ -168,11 +168,14 @@ async function run(): Promise<void> {
       projectName: core.getInput('project-name'),
       columnName: core.getInput('column-name'),
       repository: core.getInput('repository'),
-      issueNumber: Number(core.getInput('issue-number'))
+      issueNumber: Number(core.getInput('issue-number')),
+      ghesUrl: core.getInput('ghes-url')
     }
     core.debug(`Inputs: ${inspect(inputs)}`)
 
-    const octokit = github.getOctokit(inputs.token)
+    const octokit = inputs.ghesUrl
+      ? github.getOctokit(inputs.token, {baseUrl: inputs.ghesUrl})
+      : github.getOctokit(inputs.token)
 
     const projects = await getProjects(octokit, inputs.projectLocation)
     core.debug(`Projects: ${inspect(projects)}`)

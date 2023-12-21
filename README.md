@@ -86,6 +86,28 @@ jobs:
           issue-number: ${{ github.event.number }}
 ```
 
+### Use on a GitHub Enterprise Server
+
+You can provide a GitHub Enterprise Server URL using the `ghes-url` input.
+  
+```yml
+on:
+  issues:
+    types:
+      - assigned
+
+jobs:
+  move_issue:
+    runs-on: ['self-hosted']
+      - name: Create or Update Project Card
+        uses: peter-evans/create-or-update-project-card@v2
+        with:
+          ghes-url: https://github.example.com
+          project-name: My project
+          column-name: My column
+          issue-number: ${{ github.event.number }}
+```
+
 ### Action inputs
 
 | Name | Description | Default |
@@ -97,6 +119,7 @@ jobs:
 | `column-name` | (**required**) The name of the column to add a card to, or move an existing card to. | |
 | `repository` | The GitHub repository containing the issue or pull request. | `github.repository` (current repository) |
 | `issue-number` | The issue or pull request number to associate with the card. | `github.event.issue.number` |
+| `ghes-url` | The URL of a GitHub Enterprise Server instance. |
 
 ### Action outputs
 

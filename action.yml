@@ -26,6 +26,9 @@ inputs:
   issue-number:
     description: 'The issue or pull request number to associate with the card.'
     default: ${{ github.event.issue.number }}
+  ghes-url:
+    description: 'The URL of the GitHub Enterprise Server'
+    required: false
 outputs:
   card-id:
     description: 'The ID of the card.'
